@@ -7,13 +7,13 @@
 
 ## Introduction
 
-This proposal adds enhancements to `Package.swift` to allow custom layout and targets defination.
+This proposal adds enhancements to `Package.swift` to allow custom layouts and target definitions.
 
 ## Motivation
 
-The package manager currently uses a convention system to infer various targets like Swift, C family, Tests etc.
-This works well for most of the packages but sometimes more flexibility and customization is required.
-For example when someone wants to add package manager support to a large project which would be difficult to re-arrange. 
+The package manager currently uses a convention system to infer various targets like Swift, C family, tests etc.
+This works well for most of the packages but sometimes more flexibility and customization is required,
+for example when someone wants to add package manager support to a large project which would be difficult to re-arrange. 
 This becomes especially useful when porting an existing C libary to be compatible with package manager, as these libraries have no universal convention. 
 
 ## Proposed solution
@@ -137,7 +137,7 @@ We propose to add an optional property to `Target` class called `settings`. This
 What this means is either clients have to use the convention system to construct the package or manage all the targets manually. 
 This all or nothing approach is unfortunate but it will help package manager avoid subtle bugs, impossible situations and gotchas.
 
-Package manager will provide runtime errors in case custom layout is used and target settings is not provided or vice versa.
+Package manager will provide runtime errors in case custom layout is used and target settings are not provided or vice versa.
 
 An example of manifest using the custom layout and target settings:
 
