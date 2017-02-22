@@ -287,7 +287,7 @@ all APIs.
     |---|---|---| --- |
     | npm | Supported | Allows patch-level changes if a minor version is specified on the comparator. Allows minor-level changes if not.  | patch and minor updates |
     | Cargo | Supported | Same as above | Same as above |
-    | Cocoapods | Not supported | Same as above | Not present |
+    | CocoaPods | Not supported | Same as above | Not present |
     | Carthage | Not supported | patch and minor updates| Not present |
 
     * Every package manager supports the tilde `~` operator in some form.
