@@ -113,10 +113,10 @@ final class Target {
 
 The following pattern will be supported by `headers`, `sources` and `excludes`:
 
-| Pattern  | Description                                   |
-| -------- |:--------------------------------------------- | 
-| *        | matches all files in the directory            |
-| **       | recusively matches all files in the directory | 
+| Pattern  | Description                                    |
+| -------- |:-----------------------------------------------| 
+| *        | matches all files in the directory             |
+| **       | recursively matches all files in the directory | 
 
 
 For example, consider the following structure:
