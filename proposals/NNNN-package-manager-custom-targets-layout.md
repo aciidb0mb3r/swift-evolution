@@ -67,6 +67,12 @@ We also think some of the convention rules are confusing and should be removed.
       included.  This can contain both, a directory and an individual source
       file. Directories will be searched recursively for valid source files.
 
+      Each source file will be represented by String type. In future, we will
+      consider upgrading this to its own type to allow per file build setting.
+      The new type will conform to `CustomStringConvertible` so existing
+      declarations will continue to work except when the strings are
+      constructed programatically.
+
     * `exclude`: This property can be used to exclude certain files and
       directories from being picked up as sources. Exclude paths are relative
       to the target path. This property has more precedence than `sources`
