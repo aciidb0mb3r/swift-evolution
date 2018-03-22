@@ -2,7 +2,7 @@
 //
 // This source file is part of the Swift.org open source project
 //
-// Copyright (c) 2014 - 2017 Apple Inc. and the Swift project authors
+// Copyright (c) 2014 - 2018 Apple Inc. and the Swift project authors
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 // See http://swift.org/LICENSE.txt for license information
@@ -19,7 +19,7 @@ var proposals
  * To be updated when proposals are confirmed to have been implemented
  * in a new language version.
  */
-var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4', '4.1', '5']
+var languageVersions = ['2.2', '3', '3.0.1', '3.1', '4', '4.1', '4.2', '5']
 
 /** Storage for the user's current selection of filters when filtering is toggled off. */
 var filterSelection = []

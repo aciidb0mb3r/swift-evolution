@@ -4,7 +4,8 @@
 * Author: [Harlan Haskins](https://github.com/harlanhaskins)
 * Review Manager: [Ted Kremenek](https://github.com/tkremenek)
 * Implementation: [apple/swift#14048](https://github.com/apple/swift/pull/14048)
-* Status: **Active review (January 24...30)**
+* Previous Revision: [1](https://github.com/apple/swift-evolution/blob/ab0c22a2340be9bfcb82e6f237752b4d959a93b7/proposals/0196-diagnostic-directives.md)
+* Status: **Implemented (Swift 4.2)**
 
 ## Introduction
 
@@ -28,7 +29,7 @@ don't happen. `#error` solves this problem:
 
 ```swift
 #if MYLIB_VERSION < 3 && os(macOS)
-#error "MyLib versions < 3 are not supported on macOS"
+#error("MyLib versions < 3 are not supported on macOS")
 #endif
 ```
 
@@ -37,9 +38,9 @@ the values of global constants or implement missing routines:
 
 ```swift
 enum APICredentials {
-  #warning "fill in your API key below"
+  #warning("fill in your API key below")
   static let key = ""
-  #warning "fill in your API secret below"
+  #warning("fill in your API secret below")
   static let secret = ""
 }
 ```
@@ -51,7 +52,7 @@ diagnostic with the contents, pointing to the start of the message.
 
 ```swift
 func configPath() -> String {
-  #warning "this should be made more safe"
+  #warning("this should be made more safe")
   return Bundle.main().path(forResource: "Config", ofType: "plist")!
 }
 ```
@@ -63,8 +64,8 @@ This will add four new productions to the Swift grammar:
 ```
 compiler-control-statement → warning-directive
 compiler-control-statement → error-directive
-warning-directive → #warning static-string-literal
-error-directive → #error static-string-literal
+warning-directive → #warning '(' static-string-literal ')'
+error-directive → #error '(' static-string-literal ')'
 ```
 
 Upon parsing a `#error` directive, the Swift compiler will emit the provided
@@ -80,13 +81,13 @@ not taken, then no diagnostic is emitted.
 
 ```swift
 #if false
-#warning "this will not trigger a warning"
-#error "this will not trigger an error"
+#warning("this will not trigger a warning")
+#error("this will not trigger an error")
 #endif
 
 #if true
-#warning "this will trigger a warning"
-#error "this will trigger an error"
+#warning("this will trigger a warning")
+#error("this will trigger an error")
 #endif
 ```
 
@@ -150,6 +151,20 @@ to this proposal, and both could be addressed in future proposals.
 
 # Rationale
 
-On [Date], the core team decided to **(TBD)** this proposal.
-When the core team makes a decision regarding this proposal,
-their rationale for the decision will be written here.
+On February 1, 2018 the Core Team decided to **accept** this proposal with
+slight revision over the [original proposal](https://github.com/apple/swift-evolution/blob/ab0c22a2340be9bfcb82e6f237752b4d959a93b7/proposals/0196-diagnostic-directives.md).
+
+The only revision over the original proposal is to change the syntax to use
+`#warning(<Message>)` instead of `#warning <Messsage>`.  This fits well with
+most of Swift's existing compiler directives, and was strongly supported in
+the [review discussion](https://forums.swift.org/t/se-0196-compiler-diagnostic-directives/8734).
+
+The review discussion also covered a variety of possible extensions or
+variants to this proposal, including support for using `#warning` [as an
+expression](https://forums.swift.org/t/se-0196-compiler-diagnostic-directives/8734/21)
+instead of a line directive and [support for runtime issues](https://forums.swift.org/t/se-0196-compiler-diagnostic-directives/8734/6).
+The Core Team decided that while these directions are interesting and worth
+exploring, they are complementary to the core functionality serviced by this
+proposal.  Further, keeping `#warning` as a line directive allows it to be
+used in a wide variety of contexts, and serves a different need than using it
+as a placeholder expression.
